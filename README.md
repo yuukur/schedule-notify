@@ -13,3 +13,7 @@ node.js
 
 プロセスマネージャー
 - PM2
+  
+LINE通知
+- LINE NOTIFY(2025.3月にサービス終了)
+  
