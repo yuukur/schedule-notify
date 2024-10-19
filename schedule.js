@@ -33,7 +33,7 @@ async function scrapingSchedule() {
           date: columns[0]?.innerText.trim() || "",
           day: columns[1]?.innerText.trim() || "",
           start: columns[2]?.innerText.trim() || "",
-          end: columns[3].innerText.trim() || "",
+          end: columns[3]?.innerText.trim() || "",
           position: columns[4]?.innerText.tirm() || "",
         });
       }
