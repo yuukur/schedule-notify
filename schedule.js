@@ -46,7 +46,17 @@ async function scrapingSchedule() {
   //作成した配列データを送信用に整形
   let message = "\n日付 出勤 退勤 ポジション\n\n";
 
-  data.forEach((row) => {
+  data.forEach((row, index) => {
+    //最後行だけ表示を変更する
+    const isLast = index === data.length - 1;
+
+    if (isLast) {
+      let formattedRow = `${row.date}(${row.day}) ${row.start || ""} ${
+        row.end || ""
+      } ${row.position || ""}`;
+      message += formattedRow + "\n";
+    }
+
     let formattedRow = `${row.date}(${row.day}) ${row.start || "休み"} ${
       row.end || ""
     } ${row.position || ""}`;
