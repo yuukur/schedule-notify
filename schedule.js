@@ -2,6 +2,8 @@ const puppeteer = require("puppeteer");
 const axios = require("axios");
 const cron = require("node-cron");
 
+const LINE_NOTIFY_TOKEN =  /*"LINENOTIFYトークン"*/;
+
 async function scrapingSchedule() {
   //GUImodeに変更の場合、headlessの値をfalse
   const browser = await puppeteer.launch({ headless: true });
@@ -63,5 +65,24 @@ async function scrapingSchedule() {
     message += formattedRow + "\n";
   });
 
+  await sendLineMessage(message);
   await browser.close();
 }
+
+async function sendLineMessage(message) {
+  const url = "https://notify-api.line.me/api/notify";
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    Authorization: `Bearer ${LINE_NOTIFY_TOKEN}`,
+  };
+
+
+const data = new URLSearchParams();
+data.append("message", message);
+
+try {
+  const response = await axios.post(url, data, { headers });
+  console.log("通知送信成功:", response.data);
+} catch (error) {
+  console.error("通知送信失敗:", error);
+}};
