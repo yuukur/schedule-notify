@@ -86,3 +86,8 @@ async function sendLineMessage(message) {
     console.error("通知送信失敗:", error);
   }
 }
+
+cron.schedule("0 1 * * 1", () => {
+  console.log("処理成功");
+  scrapingSchedule();
+});
