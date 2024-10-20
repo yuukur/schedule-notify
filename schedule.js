@@ -25,7 +25,10 @@ async function scrapingSchedule() {
 
     //テーブル行をループし、各行のデータを抽出
     let result = [];
-    rows.forEach((row) => {
+    rows.forEach((row, index) => {
+      //最初の３行は不要
+      if (index < 3) return;
+
       const columns = row.querySelectorAll("th, td");
       //値が一つでもあれば代入
       if (columns.length > 0) {
