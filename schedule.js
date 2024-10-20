@@ -43,4 +43,15 @@ async function scrapingSchedule() {
     });
     return result;
   });
+  //作成した配列データを送信用に整形
+  let message = "\n日付 出勤 退勤 ポジション\n\n";
+
+  data.forEach((row) => {
+    let formattedRow = `${row.date}(${row.day}) ${row.start || "休み"} ${
+      row.end || ""
+    } ${row.position || ""}`;
+    message += formattedRow + "\n";
+  });
+
+  await browser.close();
 }
