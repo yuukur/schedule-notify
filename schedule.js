@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const axios = require("axios");
 const cron = require("node-cron");
 
-const LINE_NOTIFY_TOKEN =  /*"LINENOTIFYトークン"*/;
+const LINE_NOTIFY_TOKEN = /*LINENOTIFYトークン*/ "";
 
 async function scrapingSchedule() {
   //GUImodeに変更の場合、headlessの値をfalse
@@ -76,13 +76,13 @@ async function sendLineMessage(message) {
     Authorization: `Bearer ${LINE_NOTIFY_TOKEN}`,
   };
 
+  const data = new URLSearchParams();
+  data.append("message", message);
 
-const data = new URLSearchParams();
-data.append("message", message);
-
-try {
-  const response = await axios.post(url, data, { headers });
-  console.log("通知送信成功:", response.data);
-} catch (error) {
-  console.error("通知送信失敗:", error);
-}};
+  try {
+    const response = await axios.post(url, data, { headers });
+    console.log("通知送信成功:", response.data);
+  } catch (error) {
+    console.error("通知送信失敗:", error);
+  }
+}
